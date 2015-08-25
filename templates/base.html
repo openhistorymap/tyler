@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Tyler Pyramid Generator</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.indigo-pink.min.css">
+	<script src="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.min.js"></script>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+	 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css" />
+ <script src="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
+
+</head>
+<body class="mdl-layout mdl-js-layout">
+	<header class="mdl-layout__header">
+		<div class="mdl-layout__header-row">
+			<!-- Title -->
+			<span class="mdl-layout-title">Tyler Pyramid Generator</span>
+			<!-- Add spacer, to align navigation to the right -->
+			<div class="mdl-layout-spacer"></div>
+			<!-- Navigation. We hide it in small screens. -->
+			<nav class="mdl-navigation">
+				<a class="mdl-navigation__link" href="/upload">Upload new map</a>
+			</nav>
+		</div>
+	</header>
+	<main id="content" class="mdl-layout__content mdl-layout mdl-grid">
+{% block main %}
+{% endblock %}
+	</main>
+	<footer class="mdl-mega-footer">&copy; 2015 OpenHistoryMap - Made with	 <i class="material-icons">favorite</i> in Bologna</footer>
+</body>
+</html>

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block main %}
+<div class="mdl-cell mdl-cell--4-col">
+	<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+		<thead>
+			<tr>
+				<th class="mdl-data-table__cell--non-numeric">Layer</th>
+				<th class="mdl-data-table__cell--non-numeric">minzoom</th>
+				<th class="mdl-data-table__cell--non-numeric">maxzoom</th>
+				<th class="mdl-data-table__cell--non-numeric">View</th>
+			</tr>
+		</thead>
+		<tbody id="table_container">
+		</tbody>
+	</table>
+</div>
+<div id="map" style="height:400px" class="mdl-cell mdl-cell--8-col"> </div>
+
+<script>
+	$.getJSON("/list", function(data){
+		for (var i in data){
+			var add = $('<tr>\
+				<td class="mdl-data-table__cell--non-numeric">'+i+'</td>\
+				<td class="mdl-data-table__cell--non-numeric">'+data[i].minzoom+'</td>\
+				<td class="mdl-data-table__cell--non-numeric">'+data[i].maxzoom+'</td>\
+				<td class="mdl-data-table__cell--non-numeric"><button class="magic">View</button></td>\
+			</tr>');
+			add.find(".magic").data("dat", data[i]);
+			$("#table_container").append(add);
+		}
+	});
+
+	var map = L.map('map').setView([0,0], 4);
+
+	$("#table_container").on("click", ".magic", function(){
+		var dat = $(this).data("dat");
+		L.tileLayer(dat.url+'/{z}/{x}/{y}.png', {
+		    maxZoom: dat.maxzoom,
+		    minZoom: dat.minzoom,
+		    tms:true
+		}).addTo(map);
+		map.fitBounds([[dat.bbox[0], dat.bbox[1]], [dat.bbox[2], dat.bbox[3]]])
+	});
+</script>
+
+{% endblock %}
